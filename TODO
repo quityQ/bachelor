@@ -1,0 +1,8 @@
+create a base csv of companies delisted companies, that had poor performance
+    src: https://www.ser-ag.com/en/resources/notifications-market-participants/delisting-decisions.html
+
+scrape those companies also
+
+when creating the df, make sure to add a column to indicate that they're delisted
+
+
