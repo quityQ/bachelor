@@ -8,9 +8,8 @@ The free tier of the API only provides US-Data, we wish to download data for Swi
 
 import requests
 import json
-import csv
 import pandas as pd
-import os
+
 
 def get_income_statement(ticker, name):
     url = f"https://marketplace.financialmodelingprep.com/public/income-statement/{ticker}?period=annual&limit=4&apikey="
@@ -38,11 +37,11 @@ def get_balance_sheet_statement(ticker, name):
 
 def get_statements():
     
-    companies = pd.read_csv("data\companies.csv", delimiter=";")
+    companies = pd.read_csv("data\equity_issuers.csv", delimiter=";", encoding = "ISO-8859-1") #encoding is necessary to match the encoding of the source file
     
     for i, row in companies.iterrows():
-        ticker = row["ticker"]
-        name = row["name"]
+        ticker = row["Symbol"] + ".SW" #add .SW since FMP stores swiss comapneis as such
+        name = row["Company"]
         
         get_income_statement(ticker, name)
         get_cash_flow_statement(ticker, name)
