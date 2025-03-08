@@ -46,8 +46,41 @@ def get_statements():
         get_income_statement(ticker, name)
         get_cash_flow_statement(ticker, name)
         get_balance_sheet_statement(ticker, name)
-        
-        
 
+
+def get_distressed_income_statement(ticker, name):
+    url = f"https://marketplace.financialmodelingprep.com/public/income-statement/{ticker}?period=annual&limit=4&apikey="
+        
+    response = requests.get(url)
     
-get_statements()
+    with open(f"data\distressed_income_statements\{name}_income_statement.json", "w") as f:
+        json.dump(response.json(), f)
+
+def get_distressed_cash_flow_statement(ticker, name):
+    url= f"https://marketplace.financialmodelingprep.com/public/cash-flow-statement/{ticker}?period=annual&limit=4&apikey="
+
+    response = requests.get(url)
+
+    with open(f"data\distressed_cash_flow_statements\{name}_cash_flow_statement.json", "w") as f:
+        json.dump(response.json(), f)
+
+def get_distressed_balance_sheet_statement(ticker, name):
+    url = f"https://marketplace.financialmodelingprep.com/public/balance-sheet-statement/{ticker}?period=annual&limit=4&apikey="
+
+    response = requests.get(url)
+
+    with open(rf"data\distressed_balance_sheets\{name}_balance_sheet_statement.json", "w") as f: #rf so that \b isnt interpreted as a backspace
+        json.dump(response.json(), f)
+
+def get_distressed_statements():
+
+    companies = pd.read_csv("data\distressed_companies.csv", delimiter=";", encoding = "ISO-8859-1")
+
+    for i, row in companies.iterrows():
+        ticker = row["Symbol"] + ".SW"
+        name = row["Company"]
+
+        get_distressed_income_statement(ticker, name)
+        get_distressed_cash_flow_statement(ticker, name)
+        get_distressed_balance_sheet_statement(ticker, name)
+
