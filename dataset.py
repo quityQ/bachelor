@@ -1,7 +1,6 @@
 """
-dataset module to created the basic dateset from the scraped data
-datasets are concatintion of all available data there no cleaning or preprocessing done
-
+dataset module to created the basic datesets from the scraped data
+datasets are concatintion of all available data there is no cleaning or preprocessing done
 """
 import pandas as pd
 import os
@@ -29,6 +28,10 @@ def create_dataset(dir):
     df.to_csv(f"datasets/{dir}.csv")
     
 
-create_dataset("balance_sheets")
+"""create_dataset("balance_sheets")
 create_dataset("cash_flow_statements")
-create_dataset("income_statements")
+create_dataset("income_statements")"""
+
+"""create_dataset("distressed_balance_sheets")
+create_dataset("distressed_cash_flow_statements")
+create_dataset("distressed_income_statements")"""
