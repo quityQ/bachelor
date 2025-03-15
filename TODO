@@ -1,8 +1,8 @@
-create a base csv of companies delisted companies, that had poor performance
-    src: https://www.ser-ag.com/en/resources/notifications-market-participants/delisting-decisions.html
+In order to calculate the altman score properly the market cap is required
 
-scrape those companies also
+Ex. https://companiesmarketcap.com/credit-suisse/marketcap/
+gives us the market cap over several years
 
-when creating the df, make sure to add a column to indicate that they're delisted
+this seems to be the most straightforward source since all apis are paid so getting historical number of shares + price is difficult
 
-
+the issue is the name in the URL, as it's not the ticker nor the name of the company, maybe the search can be used by the scraper to find the correct page
