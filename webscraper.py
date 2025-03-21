@@ -1,9 +1,12 @@
 """
-Webscraper for the Website https://site.financialmodelingprep.com/
+Webscraper for the Website https://site.financialmodelingprep.com/ and companiesmarketcap.com
+
 finacialmodeelingprep provides Income statement, cashflowo statement and balance sheet for many companies
 Each can be downloaded as a csv file, the following code should help ease the process of downloading the files
-
 The free tier of the API only provides US-Data, we wish to download data for Swiss companies
+
+companiesmarketcap provides historical data of the marketcap of companies
+the data must be scraped from the website
 """
 
 import requests
@@ -83,4 +86,3 @@ def get_distressed_statements():
         get_distressed_income_statement(ticker, name)
         get_distressed_cash_flow_statement(ticker, name)
         get_distressed_balance_sheet_statement(ticker, name)
-

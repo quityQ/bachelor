@@ -1,10 +1,10 @@
-Company;Symbol
-Swiss Steel Holding AG;STLN
-Arundel AG;ARON
-ObsEva SA;OBSN
-Von Roll Holding AG;ROL
-Talenthouse AG;NEWN
-Credit Suisse Group AG;CSGN
-Formulafirst Ltd.;FFI
-Blackstone Resources AG;BLS
-Castle Alternative Invest AG;CASN
+Company;Symbol;marketcap_url
+Swiss Steel Holding AG;STLN;https://companiesmarketcap.com/swiss-steel/marketcap/
+Arundel AG;ARON;
+ObsEva SA;OBSN;
+Von Roll Holding AG;ROL;
+Talenthouse AG;NEWN;
+Credit Suisse Group AG;CSGN;https://companiesmarketcap.com/credit-suisse/marketcap/
+Formulafirst Ltd.;FFI;
+Blackstone Resources AG;BLS;
+Castle Alternative Invest AG;CASN;
