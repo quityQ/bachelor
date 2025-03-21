@@ -14,6 +14,10 @@ import json
 import pandas as pd
 from bs4 import BeautifulSoup
 
+"""
+The following functions are used to download the income statement, cash flow statement and balance sheet of companies
+The data is stored in the data folder in the respective subfolders as json files
+"""
 def get_income_statement(ticker, name):
     url = f"https://marketplace.financialmodelingprep.com/public/income-statement/{ticker}?period=annual&limit=4&apikey="
         
@@ -50,6 +54,10 @@ def get_statements():
         get_cash_flow_statement(ticker, name)
         get_balance_sheet_statement(ticker, name)
 
+"""
+The following funcitons are used to download the income statement, cash flow statement and balance sheet of companies that are from the distressed source file
+These are separated just to make saving them to another place easier
+"""
 
 def get_distressed_income_statement(ticker, name):
     url = f"https://marketplace.financialmodelingprep.com/public/income-statement/{ticker}?period=annual&limit=4&apikey="
@@ -86,10 +94,15 @@ def get_distressed_statements():
         get_distressed_income_statement(ticker, name)
         get_distressed_cash_flow_statement(ticker, name)
         get_distressed_balance_sheet_statement(ticker, name)
-        
-def get_marketcap(file):
+
+"""
+The following functions are used to download the marketcap of companies
+The data is stored in the data folder as csv files
+"""
+
+def get_marketcap(filename):
     
-    companies = pd.read_csv(f"data\{file}", delimiter=";", encoding = "ISO-8859-1")
+    companies = pd.read_csv(f"data\{filename}", delimiter=";", encoding = "ISO-8859-1")
     cleancompanies = companies.dropna(subset=["marketcap_url"]) 
     
     for i, row in cleancompanies.iterrows():
@@ -116,6 +129,3 @@ def marketcap_scraper(url, name):
     df = pd.DataFrame(rows)
         
     df.to_csv(f"data/market_caps/{name}_market_cap.csv", header=None, index=None)
-    
-get_marketcap("equity_issuers.csv")
-get_marketcap("distressed_companies.csv")

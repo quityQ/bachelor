@@ -59,7 +59,7 @@ def create_full_dataset():
 
     df.to_csv("datasets/full_raw_dataset.csv")
 
-
+# clean the full dataset accoding to the rwa_cleanup_guide
 def clean_full_dataset():
     df = pd.read_csv("datasets/full_raw_dataset.csv")
 
@@ -89,3 +89,35 @@ def clean_full_dataset():
               "depreciationAndAmortization_y": "depreciationAndAmortization_income_statement"}, inplace=True)
 
     df.to_csv("datasets/full_cleaned_dataset.csv")
+    
+    
+def create_marketcap_dataset():
+    dataframes = []
+    
+    filelist = glob.glob("data\market_caps\*.csv")
+
+    for path in filelist:
+        df = pd.read_csv(path)    
+        symbol = path.split("_")[1].replace("caps\\", "")
+        df['Symbol'] = symbol + ".SW"
+        dataframes.append(df)
+    
+    combined_df = pd.concat(dataframes, ignore_index=True)
+    
+    combined_df["Marketcap"] = combined_df['Marketcap'].apply(clean_marketcap)
+    
+    combined_df.to_csv("datasets/market_caps.csv", index=False)
+    
+# Function to clean the marketcap column from string e.g. $10.4B to float 10400000000
+def clean_marketcap(value):
+    if isinstance(value, str):
+        value = value.replace("$", "")
+        if 'B' in value:
+            return float(value.replace('B', '')) * 1000000000
+        elif 'M' in value:
+            return float(value.replace('M', '')) * 1000000
+        else:
+            return value
+    else:
+        # If the value is not a string (e.g., NaN), return as is
+        return value
