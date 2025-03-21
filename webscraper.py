@@ -12,7 +12,7 @@ the data must be scraped from the website
 import requests
 import json
 import pandas as pd
-
+from bs4 import BeautifulSoup
 
 def get_income_statement(ticker, name):
     url = f"https://marketplace.financialmodelingprep.com/public/income-statement/{ticker}?period=annual&limit=4&apikey="
@@ -86,3 +86,36 @@ def get_distressed_statements():
         get_distressed_income_statement(ticker, name)
         get_distressed_cash_flow_statement(ticker, name)
         get_distressed_balance_sheet_statement(ticker, name)
+        
+def get_marketcap(file):
+    
+    companies = pd.read_csv(f"data\{file}", delimiter=";", encoding = "ISO-8859-1")
+    cleancompanies = companies.dropna(subset=["marketcap_url"]) 
+    
+    for i, row in cleancompanies.iterrows():
+        url = row["marketcap_url"]
+        name = row["Symbol"]
+        marketcap_scraper(url, name)
+        
+def marketcap_scraper(url, name):
+    response = requests.get(url)   
+
+    if response.status_code != 200:
+        print("Failed to connect")
+    
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    table = soup.find('table', {'class': 'table'})
+            
+    rows = []
+    for row in table.find_all('tr'):
+        cells = row.find_all(['td', 'th'])
+        if len(cells) > 0:
+            rows.append([cell.text.strip() for cell in cells])
+            
+    df = pd.DataFrame(rows)
+        
+    df.to_csv(f"data/market_caps/{name}_market_cap.csv", header=None, index=None)
+    
+get_marketcap("equity_issuers.csv")
+get_marketcap("distressed_companies.csv")

@@ -5,3 +5,6 @@ I decide to invest the time to manually extend my list of companies with the mar
 
 while collecting the data, I noticed that the marketcap isn't fully transparent. It's unclear how the marketcap was sourced to begin with, and sometimes the website claims to show the marketcap of a holding or just a company whereas I have a group on my list (UBS for example). I'll keep the data and assume they refer to the same entity
 Another issue is that the marketcap is in USD, most of my data is in local currency (CHF)
+
+After ~2 hours of pasting URLs into my list, I have my marketcap csv in my folder
+as mentioned the data is is USD, and it's formatted as e.g. $10M instead of full numbers. I'll need to clean that up.
