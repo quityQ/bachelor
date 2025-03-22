@@ -8,3 +8,11 @@ Another issue is that the marketcap is in USD, most of my data is in local curre
 
 After ~2 hours of pasting URLs into my list, I have my marketcap csv in my folder
 as mentioned the data is is USD, and it's formatted as e.g. $10M instead of full numbers. I'll need to clean that up.
+
+The clean up is done, I have a list of companies with their marketcap in USB. I'll need to add that data to the main dataset
+
+# 22.03.
+today i'll add the marketcap data to the main dataset. I can use the symbol and year to find where to add the marketcap. Once that's done I can start with the analysis, by figuring out the altman z-score.
+
+I found that some columns are duplicated in my full dataset. It's unclear why, and drop_duplicates doesn't recognize them.
+    there were some duplicate sources in the data, after deleting those and recreating the dataset, the duplicates are gone

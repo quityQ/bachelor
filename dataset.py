@@ -6,7 +6,6 @@ import pandas as pd
 import os
 import glob
 
-
 # Function to create dataset from the scraped data
 # The function takes the directory name inside the data folder as the argument
 def create_dataset(dir, distressed_dir):
@@ -40,13 +39,6 @@ def create_dataset(dir, distressed_dir):
     df = pd.concat([df, df_distressed], ignore_index=True)
 
     df.to_csv(f"datasets/{dir}.csv")
-
-
-"""create_dataset("balance_sheets", "distressed_balance_sheets")
-create_dataset("cash_flow_statements", "distressed_cash_flow_statements")
-create_dataset("income_statements", "distressed_income_statements")"""
-
-
 # function to create a full dataset from the individual datasets
 def create_full_dataset():
     df = pd.DataFrame()
@@ -59,7 +51,7 @@ def create_full_dataset():
 
     df.to_csv("datasets/full_raw_dataset.csv")
 
-# clean the full dataset accoding to the rwa_cleanup_guide
+# clean the full dataset accoding to the raw_cleanup_guide
 def clean_full_dataset():
     df = pd.read_csv("datasets/full_raw_dataset.csv")
 
@@ -72,7 +64,7 @@ def clean_full_dataset():
               "currency_cash_flow_statement", "reportedCurrency": "currency_income_statement"}, inplace=True)
 
     # combine calendarYears to one column
-    df['Year'] = df['calendarYear'].combine_first(
+    df['year'] = df['calendarYear'].combine_first(
         df['calendarYear_x']).combine_first(df['calendarYear_y'])
     df = df.drop(columns=["calendarYear", "calendarYear_x", "calendarYear_y"])
 
@@ -88,6 +80,13 @@ def clean_full_dataset():
     df.rename(columns={"depreciationAndAmortization_x": "depreciationAndAmortization_cash_flow_statement",
               "depreciationAndAmortization_y": "depreciationAndAmortization_income_statement"}, inplace=True)
 
+    # merge marketcap into the dataset
+    df_mc = pd.read_csv("datasets/market_caps.csv")
+    df_mc = df_mc.drop(columns=["Change"])
+    df = pd.merge(df, df_mc, on=["symbol", "year"], how= "left")
+
+    df.drop_duplicates()
+
     df.to_csv("datasets/full_cleaned_dataset.csv")
     
     
@@ -99,13 +98,18 @@ def create_marketcap_dataset():
     for path in filelist:
         df = pd.read_csv(path)    
         symbol = path.split("_")[1].replace("caps\\", "")
-        df['Symbol'] = symbol + ".SW"
+        df['symbol'] = symbol + ".SW"
         dataframes.append(df)
     
     combined_df = pd.concat(dataframes, ignore_index=True)
     
     combined_df["Marketcap"] = combined_df['Marketcap'].apply(clean_marketcap)
     
+    combined_df["Marketcap"] = combined_df["Marketcap"].round()
+    combined_df["Marketcap"] = combined_df["Marketcap"].astype(int)
+
+    combined_df = combined_df.rename(columns={"Marketcap": "marketcap", "Symbol": "symbol", "Year": "year"})
+
     combined_df.to_csv("datasets/market_caps.csv", index=False)
     
 # Function to clean the marketcap column from string e.g. $10.4B to float 10400000000
@@ -119,5 +123,14 @@ def clean_marketcap(value):
         else:
             return value
     else:
-        # If the value is not a string (e.g., NaN), return as is
         return value
+
+# main function: recreates all datasets based on the source data 
+def __main__():
+    create_dataset("balance_sheets", "distressed_balance_sheets")
+    create_dataset("cash_flow_statements", "distressed_cash_flow_statements")
+    create_dataset("income_statements", "distressed_income_statements")
+
+    create_full_dataset()
+    create_marketcap_dataset()
+    clean_full_dataset()
