@@ -16,3 +16,8 @@ today i'll add the marketcap data to the main dataset. I can use the symbol and 
 
 I found that some columns are duplicated in my full dataset. It's unclear why, and drop_duplicates doesn't recognize them.
     there were some duplicate sources in the data, after deleting those and recreating the dataset, the duplicates are gone
+
+# 28.03.
+During the altman analysis I ran into 2 issues
+    1. there are still some duplicates (ex. STLN), this time it's because the same company is listed in the reegular and distressed list. I'll remove it from the regular list, since it's planning to leave the stock market in 2025, and recreate the dataset.
+    2. Some of the altman results are ridiculously extreme, those probably must be removed, but it's probably worth to check the data for edge cases, if not just to find a save threshold for a cutoff point

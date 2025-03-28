@@ -1,15 +1,5 @@
 Keep track of progress in a "diary" file, where issues and progress are noted
 
-In order to calculate the altman score properly the market cap is required
-
-Ex. https://companiesmarketcap.com/credit-suisse/marketcap/
-gives us the market cap over several years
-
-this seems to be the most straightforward source since all apis are paid so getting historical number of shares + price is difficult
-
-the issue is the name in the URL, as it's not the ticker nor the name of the company, maybe the search can be used by the scraper to find the correct page
-
-
 
 # Pasquale meeting 17.03.
 Limitations of my approach

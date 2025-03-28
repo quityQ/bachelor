@@ -93,7 +93,7 @@ def clean_full_dataset():
 def create_marketcap_dataset():
     dataframes = []
     
-    filelist = glob.glob("data\market_caps\*.csv")
+    filelist = glob.glob(rf"data\market_caps\*.csv")
 
     for path in filelist:
         df = pd.read_csv(path)    
@@ -134,3 +134,5 @@ def __main__():
     create_full_dataset()
     create_marketcap_dataset()
     clean_full_dataset()
+
+__main__()
