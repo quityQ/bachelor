@@ -21,3 +21,8 @@ I found that some columns are duplicated in my full dataset. It's unclear why, a
 During the altman analysis I ran into 2 issues
     1. there are still some duplicates (ex. STLN), this time it's because the same company is listed in the reegular and distressed list. I'll remove it from the regular list, since it's planning to leave the stock market in 2025, and recreate the dataset.
     2. Some of the altman results are ridiculously extreme, those probably must be removed, but it's probably worth to check the data for edge cases, if not just to find a save threshold for a cutoff point
+I created correlatoin matrices to get an overview of the data, but I don't think that it gave me a lot of insight.
+
+# 04.04.
+I cleaned up the matrices from last week a little bit. I think the biggest insight that gave me was that I really only have 2 valid "distressed" companies in my dataset. For each model I'm building I should use the full dataset and the dataset with the outliers removed (using 1 standard deviation). 
+Today I want to start with the logistic regression model. I'll use Introduction to statistical learning as a reference.
