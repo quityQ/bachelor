@@ -26,3 +26,7 @@ I created correlatoin matrices to get an overview of the data, but I don't think
 # 04.04.
 I cleaned up the matrices from last week a little bit. I think the biggest insight that gave me was that I really only have 2 valid "distressed" companies in my dataset. For each model I'm building I should use the full dataset and the dataset with the outliers removed (using 1 standard deviation). 
 Today I want to start with the logistic regression model. I'll use Introduction to statistical learning as a reference.
+
+After some tinkering I managed to run a logistic regression model, however in ran into a PerfectSeparationWarning. This seems to be somewhat common, so I will try to fix it.
+
+I wasn't able to fix the warning, but after reading a little about it. I think I could attempt to remove some of the variables, and see if I get better results like that. I won't be using another model, as it's recommended, mainly becuase the recommended model isn't baked into the libraries I'm using.
