@@ -33,3 +33,5 @@ I wasn't able to fix the warning, but after reading a little about it. I think I
 
 # 05.04.
 I cleaned up the logistic regression, so that i wouldn't have to use a pandas mapper. The results didn't change, so for today I'll move on to another model, I'll ask Pasquale if there is an obvious fix to the logistic regression, or if this just might be my result.
+
+I started with the tree model, which ended up being fairly straightforward to implment. It also resulted in a model with very high accuracy. I believe that to be suspicious, but even with validation it still is very strong. Not sure what to make of this result, maybe the approach with the zscore is faulty.
