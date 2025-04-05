@@ -30,3 +30,6 @@ Today I want to start with the logistic regression model. I'll use Introduction 
 After some tinkering I managed to run a logistic regression model, however in ran into a PerfectSeparationWarning. This seems to be somewhat common, so I will try to fix it.
 
 I wasn't able to fix the warning, but after reading a little about it. I think I could attempt to remove some of the variables, and see if I get better results like that. I won't be using another model, as it's recommended, mainly becuase the recommended model isn't baked into the libraries I'm using.
+
+# 05.04.
+I cleaned up the logistic regression, so that i wouldn't have to use a pandas mapper. The results didn't change, so for today I'll move on to another model, I'll ask Pasquale if there is an obvious fix to the logistic regression, or if this just might be my result.
