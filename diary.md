@@ -41,3 +41,8 @@ I had an email exchange with Paquale about my issues. Here are the next steps I 
 - Analyze pairwise correlations, and find features with high correlations, those are the features that can be ignored during anlysis
 - Create distressed dummy observations using SMOTE (?) or other methods
 - check the outliers more carefully, and try to understand why they're outliers
+
+Using SMOTE was fairly easy, but I didn't check the results manually, I just saw that the balance in my dataset was 1:1 now. Maybe there are settings to create less dummy variables, because having half the dataset be a dummy variable seem excessive. This alone however didn't fix the issues I was facing last week.
+To deal with the multicollinearity/PerfectSeparationWarning I used VIF to analyze the collinearity of features. The issue is that about 90% of the features show a high VIF value, and just removing the features with infinite VIF, didn't help much with the model.
+This might be a sign that a logistic regression isn't a good fit for my data set. I want to discuss theese findings with Pasquale if possible. Before I should continue the analysis of the logistic regression, now that I have a model that looks decent.
+

@@ -1,9 +1,14 @@
 Keep track of progress in a "diary" file, where issues and progress are noted
 
 Logistic regression
-	- try to find variables to remove to get rid of the warning
-	- roc curve
-
+	- follow the analysis in the book to get all results 
+	- roc curve 
+	- confusion matrix
+	
+Tree model
+	- use smote to create dummy observations (try to get 1:10 ratio or smething)
+	- create a tree and check it
+	- move on to forest model
 
 
 # Pasquale meeting 17.03.
@@ -25,4 +30,4 @@ Reports
 Logistic regression --> balance not so an issue
 SVM --> might be an issue
 
-data augmentation --> generate fake companies
+data augmentation --> generate fake companies (SMOTE)
