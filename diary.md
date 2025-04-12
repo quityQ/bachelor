@@ -48,3 +48,6 @@ This might be a sign that a logistic regression isn't a good fit for my data set
 
 # 12.04.
 Today I want to continue with the logistic regression analysis. I just want to get all results by the book. Then continue with the tree/forest model.
+
+I managed to get a confusion matrix and roc curve for the current model. The results seem good, but this is to be expected since I never split the data into a training and test set. 
+I wanted to add the finding to the main analysis report, I wanted to add some additional information about the data, since I originally just uploaded it. I think explaining some of the data will help the understand the decisionmaking later down the line. How ever, while trying to improve the creation of datasets a little (there is an unccessary index in the main dataset) I ran into an issue with the marketcaps using large numbers, that python can't handle natively. It's werid that I didn't run into this issue before, but I those datasets were created a while ago, when I was using the latest version of pandas. After started with the statistical analysis I had to downgrade some of the dependencies. The fix wasn't difficult, there is a decimal library that helps with dealing with large numbers. 

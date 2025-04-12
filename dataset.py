@@ -1,10 +1,12 @@
 """
-dataset module to created the basic datesets from the scraped data
-datasets are concatintion of all available data there is no cleaning or preprocessing done
+dataset module to create the basic datesets from the scraped data
+datasets are concatintion of all available data there is only minimal cleaning or preprocessing done
 """
 import pandas as pd
+import numpy as np
 import os
 import glob
+from decimal import *
 
 # Function to create dataset from the scraped data
 # The function takes the directory name inside the data folder as the argument
@@ -39,6 +41,7 @@ def create_dataset(dir, distressed_dir):
     df = pd.concat([df, df_distressed], ignore_index=True)
 
     df.to_csv(f"datasets/{dir}.csv")
+    
 # function to create a full dataset from the individual datasets
 def create_full_dataset():
     df = pd.DataFrame()
@@ -50,6 +53,7 @@ def create_full_dataset():
     df = pd.merge(df, df_is, on=['symbol', 'date'], how='right')
 
     df.to_csv("datasets/full_raw_dataset.csv")
+
 
 # clean the full dataset accoding to the raw_cleanup_guide
 def clean_full_dataset():
@@ -87,7 +91,7 @@ def clean_full_dataset():
 
     df.drop_duplicates()
 
-    df.to_csv("datasets/full_cleaned_dataset.csv")
+    df.to_csv("datasets/full_cleaned_dataset.csv", index=False)
     
     
 def create_marketcap_dataset():
@@ -106,7 +110,7 @@ def create_marketcap_dataset():
     combined_df["Marketcap"] = combined_df['Marketcap'].apply(clean_marketcap)
     
     combined_df["Marketcap"] = combined_df["Marketcap"].round()
-    combined_df["Marketcap"] = combined_df["Marketcap"].astype(int)
+    combined_df["Marketcap"] = combined_df["Marketcap"].astype(np.int64)
 
     combined_df = combined_df.rename(columns={"Marketcap": "marketcap", "Symbol": "symbol", "Year": "year"})
 
@@ -117,9 +121,9 @@ def clean_marketcap(value):
     if isinstance(value, str):
         value = value.replace("$", "")
         if 'B' in value:
-            return float(value.replace('B', '')) * 1000000000
+            return Decimal(value.replace('B', '')) * 1000000000
         elif 'M' in value:
-            return float(value.replace('M', '')) * 1000000
+            return Decimal(value.replace('M', '')) * 1000000
         else:
             return value
     else:
