@@ -46,3 +46,5 @@ Using SMOTE was fairly easy, but I didn't check the results manually, I just saw
 To deal with the multicollinearity/PerfectSeparationWarning I used VIF to analyze the collinearity of features. The issue is that about 90% of the features show a high VIF value, and just removing the features with infinite VIF, didn't help much with the model.
 This might be a sign that a logistic regression isn't a good fit for my data set. I want to discuss theese findings with Pasquale if possible. Before I should continue the analysis of the logistic regression, now that I have a model that looks decent.
 
+# 12.04.
+Today I want to continue with the logistic regression analysis. I just want to get all results by the book. Then continue with the tree/forest model.

@@ -2,8 +2,8 @@ Keep track of progress in a "diary" file, where issues and progress are noted
 
 Logistic regression
 	- follow the analysis in the book to get all results 
-	- roc curve 
-	- confusion matrix
+		- roc curve 
+		- confusion matrix
 	
 Tree model
 	- use smote to create dummy observations (try to get 1:10 ratio or smething)
