@@ -54,4 +54,5 @@ I wanted to add the finding to the main analysis report, I wanted to add some ad
 
 # 17.04.
 For the VIF analysis I had the idea to use standardized data, with the hopes of getting better results. However the results were pretty much the same as with the non-standardized data. I assume that this means that the data isn't at fault to create the extremely high VIF values, but rather the these features do just how high collinearity. 
-While during test run I just recalculated the VIF after dropping the "infinite" values, I decided to take an (manual) iterative approach this time, by removing features one by one, until I reached a satidfying result. 
+While during test run I just recalculated the VIF after dropping the "infinite" values, and then using whatever remained below 10 for the new logisttic regression; I decided to take an (manual) iterative approach this time, by removing features one by one, until I reached a satisfying number of features below 10. This iterative process proved to be better, because it actually did leave more features above 10.
+I been thinking about writing a piece of code to do that iterative process for me, incase I want to redo it for different cases, or for slightly different results, as it's fairly time intensive now. (each re-run takes about 30s with copying the name and calc the vif again)
