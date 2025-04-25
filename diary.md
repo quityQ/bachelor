@@ -56,3 +56,10 @@ I wanted to add the finding to the main analysis report, I wanted to add some ad
 For the VIF analysis I had the idea to use standardized data, with the hopes of getting better results. However the results were pretty much the same as with the non-standardized data. I assume that this means that the data isn't at fault to create the extremely high VIF values, but rather the these features do just how high collinearity. 
 While during test run I just recalculated the VIF after dropping the "infinite" values, and then using whatever remained below 10 for the new logisttic regression; I decided to take an (manual) iterative approach this time, by removing features one by one, until I reached a satisfying number of features below 10. This iterative process proved to be better, because it actually did leave more features above 10.
 I been thinking about writing a piece of code to do that iterative process for me, incase I want to redo it for different cases, or for slightly different results, as it's fairly time intensive now. (each re-run takes about 30s with copying the name and calc the vif again)
+
+# 20.04.
+After the VIF analysis I ran some logistic regression models, those were better than the previous models, but I still wasn't happy with the results. After talking to Pasquale, he suggested to continue to do model selection, and maybe define a new target to use instead of using "distressed" so that I have a better balanced dataset.
+
+# 25.04.
+I started with defining a new target "unhealthy" using the zscore as a base and calling any observation a zscore lower than 3 "unhealthy". This resulted in a well balanced datset with almost a 50/50 split. I also decided to only use the 3rd standard deviation dataset going forward. It's still large, more complete, and outliers have been removed. At the very end I could always do another regression with the full dataset for comparison, but using a stable, balanced set makes it easier to find a good model.
+I decided to automate the VIF analysis by moving the code into a function, this seems to be easier than redoing the manual steps again with the new dataset.  

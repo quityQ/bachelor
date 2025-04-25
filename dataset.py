@@ -7,9 +7,12 @@ import numpy as np
 import os
 import glob
 from decimal import *
+from statsmodels.stats.outliers_influence import variance_inflation_factor as VIF
 
 # Function to create dataset from the scraped data
 # The function takes the directory name inside the data folder as the argument
+
+
 def create_dataset(dir, distressed_dir):
     if not (os.path.isdir(f"data/{dir}") and os.path.isdir(f"data/{distressed_dir}")):
         print(f"Directory does not exist")
@@ -41,8 +44,10 @@ def create_dataset(dir, distressed_dir):
     df = pd.concat([df, df_distressed], ignore_index=True)
 
     df.to_csv(f"datasets/{dir}.csv")
-    
+
 # function to create a full dataset from the individual datasets
+
+
 def create_full_dataset():
     df = pd.DataFrame()
     df_bs = pd.read_csv("datasets/balance_sheets.csv")
@@ -87,36 +92,39 @@ def clean_full_dataset():
     # merge marketcap into the dataset
     df_mc = pd.read_csv("datasets/market_caps.csv")
     df_mc = df_mc.drop(columns=["Change"])
-    df = pd.merge(df, df_mc, on=["symbol", "year"], how= "left")
+    df = pd.merge(df, df_mc, on=["symbol", "year"], how="left")
 
     df.drop_duplicates()
 
     df.to_csv("datasets/full_cleaned_dataset.csv", index=False)
-    
-    
+
+
 def create_marketcap_dataset():
     dataframes = []
-    
+
     filelist = glob.glob(rf"data\market_caps\*.csv")
 
     for path in filelist:
-        df = pd.read_csv(path)    
+        df = pd.read_csv(path)
         symbol = path.split("_")[1].replace("caps\\", "")
         df['symbol'] = symbol + ".SW"
         dataframes.append(df)
-    
+
     combined_df = pd.concat(dataframes, ignore_index=True)
-    
+
     combined_df["Marketcap"] = combined_df['Marketcap'].apply(clean_marketcap)
-    
+
     combined_df["Marketcap"] = combined_df["Marketcap"].round()
     combined_df["Marketcap"] = combined_df["Marketcap"].astype(np.int64)
 
-    combined_df = combined_df.rename(columns={"Marketcap": "marketcap", "Symbol": "symbol", "Year": "year"})
+    combined_df = combined_df.rename(
+        columns={"Marketcap": "marketcap", "Symbol": "symbol", "Year": "year"})
 
     combined_df.to_csv("datasets/market_caps.csv", index=False)
-    
+
 # Function to clean the marketcap column from string e.g. $10.4B to float 10400000000
+
+
 def clean_marketcap(value):
     if isinstance(value, str):
         value = value.replace("$", "")
@@ -129,7 +137,43 @@ def clean_marketcap(value):
     else:
         return value
 
-# main function: recreates all datasets based on the source data 
+# function to remove features using VIF
+def vif_featuretrimmer(df, feature_count, threshold=10):
+    droplist = []
+    dfc = pd.DataFrame()
+    output = pd.DataFrame()
+
+    nums = df.select_dtypes(include=[np.number]).columns.tolist()
+
+    print("VIF feature trimming started")
+    while True:
+        dfc = df.copy()
+        dfc = dfc[nums]
+        dfc.drop(columns=droplist, inplace=True)
+        dfc.dropna(inplace=True)
+        vals = [VIF(dfc, i) for i in range(1, dfc.shape[1])]
+        vifs = pd.DataFrame({'vif': vals, 'features': dfc.columns[1:]})
+        vifs = vifs.sort_values('vif', ascending=False)
+
+        if len(vifs) < feature_count:
+            print("Feature count cannnot be reached\n")
+            print(f"Stopping at {len(vifs)} features")
+            break
+
+        if vifs['vif'].max() >= threshold:
+            droplist.append(vifs['features'].iloc[0])
+        else:
+            print("Threshold reached")
+            break
+        
+    output = df.drop(columns=droplist)
+    print("VIF feature trimming completed\n")
+    print(f"Removed {len(droplist)} features")
+    print("Final VIF values:\n")
+    print(vifs.to_markdown(index=False))
+    return output
+
+# main function: recreates all datasets based on the source data
 def __main__():
     create_dataset("balance_sheets", "distressed_balance_sheets")
     create_dataset("cash_flow_statements", "distressed_cash_flow_statements")
@@ -138,5 +182,6 @@ def __main__():
     create_full_dataset()
     create_marketcap_dataset()
     clean_full_dataset()
+
 
 __main__()
