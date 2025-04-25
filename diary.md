@@ -62,4 +62,6 @@ After the VIF analysis I ran some logistic regression models, those were better 
 
 # 25.04.
 I started with defining a new target "unhealthy" using the zscore as a base and calling any observation a zscore lower than 3 "unhealthy". This resulted in a well balanced datset with almost a 50/50 split. I also decided to only use the 3rd standard deviation dataset going forward. It's still large, more complete, and outliers have been removed. At the very end I could always do another regression with the full dataset for comparison, but using a stable, balanced set makes it easier to find a good model.
-I decided to automate the VIF analysis by moving the code into a function, this seems to be easier than redoing the manual steps again with the new dataset.  
+I decided to automate the VIF analysis by moving the code into a function, this seems to be easier than redoing the manual steps again with the new dataset. 
+
+at the end of the day I had a logreg model with decent results. I created a second model after splitting the data into a training and test set. The results ended up spightly worse. The next step would be to continue with other models (forest then SVM).
