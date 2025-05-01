@@ -65,3 +65,6 @@ I started with defining a new target "unhealthy" using the zscore as a base and 
 I decided to automate the VIF analysis by moving the code into a function, this seems to be easier than redoing the manual steps again with the new dataset. 
 
 at the end of the day I had a logreg model with decent results. I created a second model after splitting the data into a training and test set. The results ended up spightly worse. The next step would be to continue with other models (forest then SVM).
+
+# 28.04.
+continued a bit with the forest model. Didn't run into manny issues, but also couldn't get too much done today timewise
