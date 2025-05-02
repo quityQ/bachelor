@@ -68,3 +68,9 @@ at the end of the day I had a logreg model with decent results. I created a seco
 
 # 28.04.
 continued a bit with the forest model. Didn't run into manny issues, but also couldn't get too much done today timewise
+
+# 02.05.
+today I want to continue with the forest model. I'll look to evaluation methods and then start on the actual analysis/report. 
+Then perhaps I can create a tree based model using bagging (as a comparison, and to show have some visualization of what a single tree looks like).
+
+Then I could continue with the SVM model, but I think it's time to put my findings into proper writing.
