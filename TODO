@@ -1,13 +1,7 @@
 Keep track of progress in a "diary" file, where issues and progress are noted
 
-Update the main analysis with findings from logreg playground
-	- analyze the 3std data using VIF and logred
-	- do logreg + analysis for full dataset
-	
-Tree model
-	- use smote to create dummy observations (try to get 1:10 ratio or smething)
-	- create a tree and check it
-	- move on to forest model
+- create forest analysis
+- create a final comparison report includes all models
 
 
 # Pasquale meeting 17.03.
