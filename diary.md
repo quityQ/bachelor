@@ -74,3 +74,9 @@ today I want to continue with the forest model. I'll look to evaluation methods 
 Then perhaps I can create a tree based model using bagging (as a comparison, and to show have some visualization of what a single tree looks like).
 
 Then I could continue with the SVM model, but I think it's time to put my findings into proper writing.
+
+I finished the forest analysis more or less. I think the results seem good. I can attempt one more model where I resample the data and see how that affects the results.
+
+# 03.05.
+Today I started with the idea I had for the forest model. This gave me an overfitted model, I think it's just difficult to resample the data I have.
+I will do some administrative work today (create the reports) and then start with writing the thesis using the results I have.
