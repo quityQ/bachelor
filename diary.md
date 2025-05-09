@@ -80,3 +80,13 @@ I finished the forest analysis more or less. I think the results seem good. I ca
 # 03.05.
 Today I started with the idea I had for the forest model. This gave me an overfitted model, I think it's just difficult to resample the data I have.
 I will do some administrative work today (create the reports) and then start with writing the thesis using the results I have.
+
+# 05.05.
+I continued with the thesis. I finished with the theoretical background part,
+
+# 06.05.
+I continued with the thesis. I finished up writing about the models I've used, and continued to write about the data and the processes around it. 
+
+# 09.05.
+In the mornign I finished writing about the tools/and methods used. I'll continues with the explanation of the evaluation methods. Then I can start with descriing the results
+I managed to finally start with describing the analysis. Will continue tomorrow
