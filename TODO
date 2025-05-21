@@ -35,3 +35,5 @@ data augmentation --> generate fake companies (SMOTE)
 - Pay attention to overfitting, as much as possible. Better discuss the issue.
 - Please improve the references. For example, when referencing code and repositories, either put the info in a footnote, and in that case it is sufficient to provide a link with the time stamp, or try to provide the name of the author/company, if you prefer to put the info in the final bibliography. Also, avoid n.d. (you can use the date of retrieval, in case).
 - In the parts that are “to do”, try to keep a critical view on your work: what are you happy about? What could be improved? How? How do your results compare with the literature?
+
+END
